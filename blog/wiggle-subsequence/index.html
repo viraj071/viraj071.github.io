@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="Viraj Shah&#39;s Personal Website">
+<meta name="keywords" content="viraj,shah,software,engineer">
+
+<base href="https://viraj071.github.io">
+
+<title>Viraj Shah</title>
+
+<meta name="generator" content="Hugo 0.30.2" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://viraj071.github.io/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-us">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Wiggle Subsequence</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+      PUBLISHED ON OCT 24, 2017
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/algorithms">ALGORITHMS</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <p>I was solving a problem called <strong><a href="https://leetcode.com/problems/wiggle-subsequence">Wiggle Subsequence</a></strong> on leetcode today.</p>
+
+<p>I spent sometime thinking of the solution to the problem before I realized that there was a similar <em>named</em> problem I had solved recently. <strong><a href="https://leetcode.com/problems/longest-increasing-subsequence/description/">Longest Increasing Subsequence</a></strong>.</p>
+
+<p>One of the solutions to the problem runs in <strong><em>O(n<sup>2</sup>)</em></strong> time. That solution calculates the longest increasing subsequence of a given index <strong><em>i</em></strong> by checking the longest increasing subsequence for all indices <strong><em>j</em></strong> &lt; <strong><em>i</em></strong> for which <strong><em>nums[i] &gt; nums[j]</em></strong>. Check <strong><a href="http://www.geeksforgeeks.org/longest-increasing-subsequence/">here</a></strong>.</p>
+
+<p>Based on that, I devised a similar solution that ran in <strong><em>O(n<sup>2</sup>)</em></strong> time using <strong><em>O(2n)</em></strong> space.</p>
+
+<pre><code>public int wiggleMaxLength(int[] nums) {
+    int len = nums.length;
+    if (len &lt; 2) {
+        return len;
+    }
+    int[] parent = new int[len];
+    int[] count = new int[len];
+    parent[0] = -1;
+    count[0] = 1;
+    for (int i = 1; i &lt; len; ++i) {
+        for(int j = 0; j&lt;i; ++j) {
+        	int currentDiff = nums[i] - nums[j];
+
+        	// If currentDiff is zero, it means that you can either
+        	// include i or j but not both.
+        	if (currentDiff == 0) {
+        		if (count[j] &gt; count[i]) {
+        			parent[i] = parent[j];
+        			count[i] = count[j];
+        		}
+        		continue;
+        	}
+
+        	// If there is no previous number to j then assume
+        	// this is the first pair in the wiggle subsequenence.
+        	if (parent[j] == -1) {
+    			parent[i] = j;
+    			count[i] = count[j] + 1;
+        		continue;
+        	}
+        	int parentDiff = nums[j] - nums[parent[j]];
+        	if (((currentDiff &gt; 0) &amp;&amp; (parentDiff &lt; 0)) ||
+        	 ((currentDiff &lt; 0) &amp;&amp; (parentDiff &gt; 0))) {
+        		if (count[j] + 1 &gt; count[i]) {
+        			parent[i] = j;
+        			count[i] = count[j] + 1;
+        		}
+        	}
+        }
+    }
+
+    int ans = count[0];
+    for (int i = 1; i &lt; len; ++i) {
+    	ans = Math.max(ans, count[i]);
+    }
+    return ans;
+}
+</code></pre>
+
+<p>On optimizing the above solution, one could argue that instead of looking at all the <strong><em>j</em></strong> elements before <strong><em>i</em></strong>, we could just look at the value of <strong><em>i-1</em></strong>.</p>
+
+<p>This is how that would work:</p>
+
+<pre><code>public int wiggleMaxLength(int[] nums) {
+    int len = nums.length;
+    if (len &lt; 2) {
+        return len;
+    }
+    int parent = -1;
+    int count = 1;
+    for (int i = 1; i &lt; len; ++i) {
+        int currentDiff = nums[i] - nums[i-1];
+
+        // If currentDiff is zero, it means that you can either
+        // include i or i-1 but not both.
+        if (currentDiff == 0) {
+            continue;
+        }
+
+        // If there is no previous number to j then assume
+    	// this is the first pair in the wiggle subsequenence.
+        if (parent == -1) {
+            parent = i-1;
+            count = count + 1;
+            continue;
+        }
+        int parentDiff = nums[i-1] - nums[parent];
+        if (((currentDiff &gt; 0) &amp;&amp; (parentDiff &lt; 0)) ||
+         ((currentDiff &lt; 0) &amp;&amp; (parentDiff &gt; 0))) {
+			parent = i - 1;
+			count = count + 1;
+        }
+    }
+    return count;
+}
+
+</code></pre>
+
+<p>If you notice the above solution, you can see that there are <strong><em>3</em></strong> states that the <strong><em>currentDiff</em></strong> can be in:</p>
+
+<ol>
+<li><em>nums[i] &gt; nums[i-1]</em></li>
+<li><em>nums[i] &lt; nums[i-1]</em></li>
+<li><em>nums[i] = nums[i-1]</em></li>
+</ol>
+
+<p>In state <strong>3</strong>, we do nothing as the difference is neither positive nor negative and hence both <strong><em>i</em></strong> and <strong><em>i-1</em></strong> could not be counted towards the final count.</p>
+
+<p>In state <strong>1</strong>, if <strong><em>parentDiff</em></strong>, which is nothing but <strong><em>nums[i-1] - nums[parent]</em></strong>, is negative, it means that element <strong><em>i</em></strong> adheres to the requirements and hence we increase the count. If <strong><em>parentDiff</em></strong> is positive, it means that you can either have <strong><em>i-1</em></strong> or <strong><em>i</em></strong> as part of the final count, but not both. This would mean that the <strong>parent of i would be the same as parent of i-1.</strong></p>
+
+<p>In state <strong>2</strong>, we follow the similar logic as in state <strong>1</strong> mentioned above.</p>
+
+<p>The above solution has <strong><em>O(n)</em></strong> time complexity and <strong><em>O(1)</em></strong> space complexity.</p>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="https://viraj071.github.io/blog/first-blog/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/blog">blog</a></span>
+  
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="https://viraj071.github.io">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017. Viraj Shah. <a href="http://creativecommons.org/licenses/by/3.0/">Some Rights Reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

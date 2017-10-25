@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blogs on Viraj Shah</title>
-    <link>https://viraj071.github.io/blog/</link>
-    <description>Recent content in Blogs on Viraj Shah</description>
+    <title>Algorithms on Viraj Shah</title>
+    <link>https://viraj071.github.io/categories/algorithms/</link>
+    <description>Recent content in Algorithms on Viraj Shah</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 24 Oct 2017 18:57:52 -0700</lastBuildDate>
     
-	<atom:link href="https://viraj071.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://viraj071.github.io/categories/algorithms/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,16 +20,6 @@
       <description>I was solving a problem called Wiggle Subsequence on leetcode today.
 I spent sometime thinking of the solution to the problem before I realized that there was a similar named problem I had solved recently. Longest Increasing Subsequence.
 One of the solutions to the problem runs in O(n2) time. That solution calculates the longest increasing subsequence of a given index i by checking the longest increasing subsequence for all indices j &amp;lt; i for which nums[i] &amp;gt; nums[j].</description>
-    </item>
-    
-    <item>
-      <title>First Blog</title>
-      <link>https://viraj071.github.io/blog/first-blog/</link>
-      <pubDate>Mon, 23 Oct 2017 19:01:39 -0700</pubDate>
-      
-      <guid>https://viraj071.github.io/blog/first-blog/</guid>
-      <description>Hello all!
-This is my first blog. Excitied to get this ball rolling.</description>
     </item>
     
   </channel>
