@@ -70,7 +70,7 @@
 
 <p>I spent sometime thinking of the solution to the problem before I realized that there was a similar <em>named</em> problem I had solved recently. <strong><a href="https://leetcode.com/problems/longest-increasing-subsequence/description/">Longest Increasing Subsequence</a></strong>.</p>
 
-<p>One of the solutions to the problem runs in <strong><em>O(n<sup>2</sup>)</em></strong> time. That solution calculates the longest increasing subsequence of a given index <strong><em>i</em></strong> by checking the longest increasing subsequence for all indices <strong><em>j</em></strong> &lt; <strong><em>i</em></strong> for which <strong><em>nums[i] &gt; nums[j]</em></strong>. Check <strong><a href="http://www.geeksforgeeks.org/longest-increasing-subsequence/">here</a></strong>.</p>
+<p>One of the solutions to the problem runs in <strong><em>O(n<sup>2</sup>)</em></strong> time. That solution calculates the longest increasing subsequence of a given index <code>i</code> by checking the longest increasing subsequence for all indices <code>j</code> &lt; <code>i</code> for which <code>nums[i] &gt; nums[j]</code>. Check <strong><a href="http://www.geeksforgeeks.org/longest-increasing-subsequence/">here</a></strong>.</p>
 
 <p>Based on that, I devised a similar solution that ran in <strong><em>O(n<sup>2</sup>)</em></strong> time using <strong><em>O(2n)</em></strong> space.</p>
 
@@ -123,7 +123,7 @@
 }
 </code></pre>
 
-<p>On optimizing the above solution, one could argue that instead of looking at all the <strong><em>j</em></strong> elements before <strong><em>i</em></strong>, we could just look at the value of <strong><em>i-1</em></strong>.</p>
+<p>On optimizing the above solution, one could argue that instead of looking at all the <code>j</code> elements before <code>i</code>, we could just look at the value of <code>i-1</code>.</p>
 
 <p>This is how that would work:</p>
 
@@ -162,17 +162,17 @@
 
 </code></pre>
 
-<p>If you notice the above solution, you can see that there are <strong><em>3</em></strong> states that the <strong><em>currentDiff</em></strong> can be in:</p>
+<p>If you notice the above solution, you can see that there are <strong><em>3</em></strong> states that the <code>currentDiff</code> can be in:</p>
 
 <ol>
-<li><em>nums[i] &gt; nums[i-1]</em></li>
-<li><em>nums[i] &lt; nums[i-1]</em></li>
-<li><em>nums[i] = nums[i-1]</em></li>
+<li><code>nums[i] &gt; nums[i-1]</code></li>
+<li><code>nums[i] &lt; nums[i-1]</code></li>
+<li><code>nums[i] = nums[i-1]</code></li>
 </ol>
 
-<p>In state <strong>3</strong>, we do nothing as the difference is neither positive nor negative and hence both <strong><em>i</em></strong> and <strong><em>i-1</em></strong> could not be counted towards the final count.</p>
+<p>In state <strong>3</strong>, we do nothing as the difference is neither positive nor negative and hence both <code>i</code> and <code>i-1</code> could not be counted towards the final count.</p>
 
-<p>In state <strong>1</strong>, if <strong><em>parentDiff</em></strong>, which is nothing but <strong><em>nums[i-1] - nums[parent]</em></strong>, is negative, it means that element <strong><em>i</em></strong> adheres to the requirements and hence we increase the count. If <strong><em>parentDiff</em></strong> is positive, it means that you can either have <strong><em>i-1</em></strong> or <strong><em>i</em></strong> as part of the final count, but not both. This would mean that the <strong>parent of i would be the same as parent of i-1.</strong></p>
+<p>In state <strong>1</strong>, if <code>parentDiff</code>, which is nothing but <code>nums[i-1] - nums[parent]</code>, is negative, it means that element <code>i</code> adheres to the requirements and hence we increase the count. If <code>parentDiff</code> is positive, it means that you can either have <code>i-1</code> or <code>i</code> as part of the final count, but not both. This would mean that the <strong>parent of <code>i</code> would be the same as parent of <code>i-1</code>.</strong></p>
 
 <p>In state <strong>2</strong>, we follow the similar logic as in state <strong>1</strong> mentioned above.</p>
 
