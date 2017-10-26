@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Os on Viraj Shah</title>
+    <link>https://viraj071.github.io/categories/os/</link>
+    <description>Recent content in Os on Viraj Shah</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 26 Oct 2017 08:22:44 -0700</lastBuildDate>
+    
+	<atom:link href="https://viraj071.github.io/categories/os/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>User and Kernel Level Threads</title>
+      <link>https://viraj071.github.io/blog/user-kernel-level-threads/</link>
+      <pubDate>Thu, 26 Oct 2017 08:22:44 -0700</pubDate>
+      
+      <guid>https://viraj071.github.io/blog/user-kernel-level-threads/</guid>
+      <description>Kernel-Level Theads These threads are also known as &amp;ldquo;OS-level threads&amp;rdquo; or &amp;ldquo;native threads&amp;rdquo;. Kernel-level threads are managed by the OS. This means all thread scheduling happens in the kernel. For that to happen, the kernel maintains a thread table that keeps track of all threads in the system. These threads are created by making a system call into the OS.
+Advantages:
+ The scheduler can give more time to a process having a large number of threads rather than to a process having a smaller number of threads.</description>
+    </item>
+    
+  </channel>
+</rss>
