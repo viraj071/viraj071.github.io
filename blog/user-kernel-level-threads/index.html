@@ -89,7 +89,7 @@
 
 <p><img src="https://www.tutorialspoint.com/operating_system/images/user_threads.jpg" alt="User-level threads" /></p>
 
-<p>These threads are also known as &ldquo;green threads&rdquo;. These threads are managed by the user-level runtime library and <strong>not</strong> the OS. The kernel knows nothing about the user-level threads and as far it is concerned, it is only managing a single-threaded process. Most the thread level activities like creating new threads, switching between threads, syncronization all happen without kernel involvement. One other thing to keep in mind is that some <strong><em>blocking calls</em></strong> like reading a file (<code>data = file.read()</code>) are converted to <strong><em>asynchronous calls</em></strong> by the user-level library so other user level threads are not blocked.</p>
+<p>These threads are also known as &ldquo;green threads&rdquo;. These threads are managed by the user-level runtime library and <strong>not</strong> the OS. The kernel knows nothing about the user-level threads and as far it is concerned, it is only managing a single-threaded process. Most of the thread level activities like creating new threads, switching between threads, syncronization, all happen without kernel involvement. One other thing to keep in mind is that some <strong><em>blocking calls</em></strong> like reading a file (<code>data = file.read()</code>) are converted to <strong><em>asynchronous calls</em></strong> by the user-level library so other user level threads are not blocked.</p>
 
 <p><strong>Advantages:</strong></p>
 
