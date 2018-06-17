@@ -43,20 +43,20 @@
 
 
 <header class="row text-left title">
-  <h1 class="title">User and Kernel Level Threads</h1>
+  <h1 class="title">Largest Divisible Subset</h1>
 </header>
 <section id="category-pane" class="row meta">
   
   <div class="col-md-12">
     <h6 class="text-left meta">
-      PUBLISHED ON OCT 26, 2017
+      PUBLISHED ON JUN 16, 2018
       
       
       
       —
       
       
-      <a class="meta" href="/categories/os">OS</a>
+      <a class="meta" href="/categories/algorithms">ALGORITHMS</a>
       
       
       
@@ -66,54 +66,77 @@
 </section>
 <section id="content-pane" class="row">
   <div class="col-md-12 text-justify content">
+    <p>I was solving the problem <strong><a href="https://leetcode.com/problems/largest-divisible-subset/description/">Largest Divisible Subset</a></strong> on Leetcode a while back.</p>
+
+<p>The problem is as follows:</p>
+
+<p>Given a set of distinct positive integers, we need to find the largest subset of this set such that every pair(<code>E1</code>, <code>E2</code>) of elements in that set satisfy one of the following conditions:</p>
+
+<ul>
+<li><code>E1</code> % <code>E2</code> == 0</li>
+<li><code>E2</code> % <code>E1</code> == 0</li>
+</ul>
+
+<p>If there are multiple such subsets, we can return any one of them.</p>
+
+<p>The brute force solution to this problem would be to generate all subsets of a given input set and then return a largest set that satisfies the above criteria. The time complexity would be <strong>O(2<sup>n</sup>)</strong> + the time taken to check if the required criteria is satisfied.</p>
+
+<p>We can do better with <strong>dynamic programming.</strong></p>
+
+<p>The crux of the problem is noticing the following <em>transitive</em> property emitted by numbers that are divisible.
+<strong>If A % B == 0 &amp;&amp; B % C == 0 then A % C == 0 for any A&lt;B&lt;C.</strong></p>
+
+<p>For us to work with the above property, we need to first sort the input array.</p>
+
+<p>The recursive formula then would be:</p>
+
+<p><strong>Dp<sub>i</sub>
+= Max of 1 + Dp<sub>j</sub> over all j in the range (0&hellip;i-1) which satisfy nums<sub>i</sub> % nums<sub>j</sub> == 0.</strong></p>
+
+<p>We can solve this in the bottom-up fashion while keeping track of the <code>largest</code> and <code>parent</code> values for each index.
+The <code>parent</code> value array would help us recreate the <code>largest</code> set.</p>
+
+<pre><code>public List&lt;Integer&gt; largestDivisibleSubset(int[] nums) {
+    int len = nums.length;
+    List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+    if (len == 0) {
+        return ans;
+    }
+    Arrays.sort(nums);
+    // This array holds the index of previous member of the largest set ending at i.
+    int[] parent = new int[len];
+    // This array holds the size of largest divisible set ending at index i including i.
+    int[] largest = new int[len];
+    int maxSubset = 1;
+    int maxSubsetIndex = 0;
+    for (int i = 0; i&lt;len; ++i) {
+        largest[i] = 1;
+        parent[i] = -1;
+        for (int j = 0; j &lt; i; ++j) {
+            if (nums[i] % nums[j] == 0 || nums[j] % nums[i] == 0) {
+                if (largest[j] + 1 &gt; largest[i]) {
+                    largest[i] = largest[j] + 1;
+                    parent[i] = j;
+                }
+            }
+            if (largest[i] &gt;= maxSubset) {
+                maxSubset = largest[i];
+                maxSubsetIndex = i;
+            }
+        }
+    }
     
+    // Create the answer subset.
+    int index = maxSubsetIndex;
+    while (index != -1) {
+        ans.add(0, nums[index]);
+        index = parent[index];
+    }
+    return ans;
+}
+</code></pre>
 
-<h3 id="kernel-level-theads">Kernel-Level Theads</h3>
-
-<p>These threads are also known as &ldquo;OS-level threads&rdquo; or &ldquo;native threads&rdquo;. Kernel-level threads are managed by the OS. This means all thread scheduling happens in the kernel. For that to happen, the kernel maintains a thread table that keeps track of all threads in the system. These threads are created by making a system call into the OS.</p>
-
-<p><strong>Advantages:</strong></p>
-
-<ul>
-<li>The scheduler can give more time to a process having a large number of threads rather than to a process having a smaller number of threads. This is possible as it keeps track of all threads in the system.</li>
-</ul>
-
-<p><strong>Disadvantages:</strong></p>
-
-<ul>
-<li>These threads are slow because they need to switch into the kernel mode for scheduling purposes.</li>
-<li>As the kernel is not only responsible for scheduling at the process level but also at the thread level, it increases the kernel complexity.</li>
-</ul>
-
-<h3 id="user-level-threads">User-Level Threads</h3>
-
-<p><img src="https://www.tutorialspoint.com/operating_system/images/user_threads.jpg" alt="User-level threads" /></p>
-
-<p>These threads are also known as &ldquo;green threads&rdquo;. These threads are managed by the user-level runtime library and <strong>not</strong> the OS. The kernel knows nothing about the user-level threads and as far it is concerned, it is only managing a single-threaded process. Most of the thread level activities like creating new threads, switching between threads, syncronization, all happen without kernel involvement. One other thing to keep in mind is that some <strong><em>blocking calls</em></strong> like reading a file (<code>data = file.read()</code>) are converted to <strong><em>asynchronous calls</em></strong> by the user-level library so other user level threads are not blocked.</p>
-
-<p><strong>Advantages:</strong></p>
-
-<ul>
-<li>Much faster than kernel-level threads as switching of modes betwen user mode to kernel mode is not required for most thread level activities.</li>
-</ul>
-
-<p><strong>Disadvanges:</strong></p>
-
-<ul>
-<li>As the kernel has no information regarding user-level threads, it does not have a process level thread count. Hence process scheduling decisions are not made keeping the thread count.</li>
-<li>A single blocking call by a user-level thread can block the entire process. To overcome this, most OS kernels have a scheduler activations mechanism. Read more about it <a href="https://en.wikipedia.org/wiki/Scheduler_activations">here</a>.</li>
-</ul>
-
-<hr />
-
-<h4 id="more-references">More References:</h4>
-
-<ul>
-<li><a href="https://www.tutorialspoint.com/operating_system/os_multi_threading.htm">TutorialsPoint</a></li>
-<li><a href="https://docs.oracle.com/cd/E19455-01/806-5257/mtintro-54820/index.html">Oracle</a></li>
-<li><a href="http://www.cs.iit.edu/~cs561/cs450/ChilkuriDineshThreads/dinesh%27s%20files/User%20and%20Kernel%20Level%20Threads.html">Illinois Institute of Technology</a></li>
-<li><a href="https://stackoverflow.com/a/15984127/2156877">Stack Overflow</a></li>
-</ul>
+<p>The above solution has <strong><em>O(n<sup>2</sup>)</em></strong> time complexity and <strong><em>O(n)</em></strong> space complexity.</p>
 
   </div>
 </section>
@@ -133,13 +156,11 @@
 <section id="menu-pane" class="row menu text-center">
   
   
-  <span><a class="menu-item" href="https://viraj071.github.io/blog/wiggle-subsequence/">&lt; prev | </a></span>
+  <span><a class="menu-item" href="https://viraj071.github.io/blog/user-kernel-level-threads/">&lt; prev | </a></span>
   
   
   <span><a class="menu-item" href="/blog">blog</a></span>
   
-  
-  <span><a class="menu-item" href="https://viraj071.github.io/blog/largest-divisible-subset/"> | next &gt;</a></span>
   
   
   <h4 class="text-center"><a class="menu-item" href="https://viraj071.github.io">home</a></h4>

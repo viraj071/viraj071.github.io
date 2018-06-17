@@ -6,10 +6,22 @@
     <description>Recent content on Viraj Shah</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 Oct 2017 08:22:44 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 16 Jun 2018 20:54:20 -0700</lastBuildDate>
     
 	<atom:link href="https://viraj071.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Largest Divisible Subset</title>
+      <link>https://viraj071.github.io/blog/largest-divisible-subset/</link>
+      <pubDate>Sat, 16 Jun 2018 20:54:20 -0700</pubDate>
+      
+      <guid>https://viraj071.github.io/blog/largest-divisible-subset/</guid>
+      <description>I was solving the problem Largest Divisible Subset on Leetcode a while back.
+The problem is as follows:
+Given a set of distinct positive integers, we need to find the largest subset of this set such that every pair(E1, E2) of elements in that set satisfy one of the following conditions:
+ E1 % E2 == 0 E2 % E1 == 0  If there are multiple such subsets, we can return any one of them.</description>
+    </item>
     
     <item>
       <title>User and Kernel Level Threads</title>
