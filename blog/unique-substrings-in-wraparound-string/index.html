@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="Viraj Shah&#39;s Personal Website">
+<meta name="keywords" content="viraj,shah,software,engineer">
+
+<base href="https://viraj071.github.io">
+
+<title>Viraj Shah</title>
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://viraj071.github.io/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-us">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Unique Substrings in Wraparound String</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+      PUBLISHED ON SEP 9, 2018
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/algorithms">ALGORITHMS</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <p>Solving <strong><a href="https://leetcode.com/problems/unique-substrings-in-wraparound-string/description/">Unqiue Substrings in Wraparound String</a></strong> problem on Leetcode.</p>
+
+<p>The overall gist of the problem is as follows:
+Given a string <code>p</code>, you need to find the total count of all the non-empty unique substrings of <code>p</code>, present in a infinite wraparound string of <em>abcdefghijklmnopqrstuvwxyz</em>, where length of <code>p</code> could be over <strong>10000</strong> characters.</p>
+
+<p>The brute force solution to this problem would be to go over all the substrings of <code>p</code> and check if they are present in the above wraparound string. The time complexity of this solution would be of the order of <strong>O(n<sup>3</sup>)</strong>.</p>
+
+<p>We can do better with <strong>dynamic programming.</strong></p>
+
+<p>To avoid duplicates in our final count, we would need to somehow keep track of all the substrings we have already added to our count. Doing this would require a lot of memory. Instead, what if we kept track of the length of the maximum substring ending in a particular character and update it as and when we find a new substring ending in the same character. While doing so, we also substract the previous maximum from the total and add the new maximum to the total to avoid the duplicate count.</p>
+
+<pre><code>public int findSubstringInWraproundString(String p) {
+    if (p.length() &lt; 1) {
+        return p.length();
+    }
+    Map&lt;Character, Integer&gt; charToSubstringCount = new HashMap&lt;&gt;();
+    int prevCount = 1;
+    int total = 1;
+    charToSubstringCount.put(p.charAt(0), 1);
+    for (int i = 1; i&lt;p.length(); ++i) {
+        char currentChar = p.charAt(i);
+        char prevChar = p.charAt(i-1);
+        int currentCount = 1;
+        if (currentChar == 'a') {
+            if (prevChar == 'z') {
+                currentCount = prevCount + 1;
+            }
+        } else if (prevChar + 1 == currentChar) {
+            currentCount = prevCount + 1;
+        }
+        if (!charToSubstringCount.containsKey(currentChar)) {
+            charToSubstringCount.put(currentChar, currentCount);
+            total += currentCount;
+        } else {
+            if (currentCount &gt; charToSubstringCount.get(currentChar)) {
+                total = total - charToSubstringCount.get(currentChar) + currentCount;
+                charToSubstringCount.put(currentChar, currentCount);
+            }
+        }
+        prevCount = currentCount;
+    }
+    return total;
+}
+</code></pre>
+
+<p><strong><em>For example</em></strong></p>
+
+<p>Consider <code>p</code> to be <strong><em>abzabc</em></strong>.</p>
+
+<p><strong>a</strong> in itself is a valid substring so we start with the <code>total</code> count to be 1 and we use the <code>prevCount</code> to count the length of the substring which is valid, in this case, the consecutive elements are part of the above wraparound string, till the previous character.
+Starting at index 1, we check if the previous character and current character form a valid substring. If they do, we increase the length of the valid substring to include the current character.
+Once we have the length of the substring ending at the current character, we check if we already have seen a substring ending in the current character previously. If we do, and its length was smaller than the current substring length, we substract the previous length and add the new length.</p>
+
+<table>
+<thead>
+<tr>
+<th>Index.</th>
+<th>Maximum Length ending in character.</th>
+<th>Total</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>a-&gt;1</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>a-&gt;1, b-&gt;2</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>a-&gt;1, b-&gt;2, z-&gt;1</td>
+<td>4</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>b-&gt;2, z-&gt;1, a-&gt;2</td>
+<td>5</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>z-&gt;1, a-&gt;2, b-&gt;3</td>
+<td>6</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>z-&gt;1, a-&gt;2, b-&gt;3, c-&gt;4</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+
+<p>The above solution has <strong><em>O(n)</em></strong> time complexity and <strong><em>O(1)</em></strong> space complexity.</p>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="https://viraj071.github.io/blog/largest-divisible-subset/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/blog">blog</a></span>
+  
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="https://viraj071.github.io">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017. Viraj Shah. <a href="http://creativecommons.org/licenses/by/3.0/">Some Rights Reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-108622549-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

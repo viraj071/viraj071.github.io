@@ -6,10 +6,21 @@
     <description>Recent content in Algorithms on Viraj Shah</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Jun 2018 20:54:20 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 09 Sep 2018 21:28:20 -0700</lastBuildDate>
     
 	<atom:link href="https://viraj071.github.io/categories/algorithms/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Unique Substrings in Wraparound String</title>
+      <link>https://viraj071.github.io/blog/unique-substrings-in-wraparound-string/</link>
+      <pubDate>Sun, 09 Sep 2018 21:28:20 -0700</pubDate>
+      
+      <guid>https://viraj071.github.io/blog/unique-substrings-in-wraparound-string/</guid>
+      <description>Solving Unqiue Substrings in Wraparound String problem on Leetcode.
+The overall gist of the problem is as follows: Given a string p, you need to find the total count of all the non-empty unique substrings of p, present in a infinite wraparound string of abcdefghijklmnopqrstuvwxyz, where length of p could be over 10000 characters.
+The brute force solution to this problem would be to go over all the substrings of p and check if they are present in the above wraparound string.</description>
+    </item>
     
     <item>
       <title>Largest Divisible Subset</title>
