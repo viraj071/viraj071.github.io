@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="Viraj Shah&#39;s Personal Website">
+<meta name="keywords" content="viraj,shah,software,engineer">
+
+<base href="https://viraj071.github.io">
+
+<title>Viraj Shah</title>
+
+<meta name="generator" content="Hugo 0.49.2" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://viraj071.github.io/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-us">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Static factory methods instead of constructors</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+      PUBLISHED ON OCT 22, 2018
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/effective-java">EFFECTIVE-JAVA</a>, 
+      
+      <a class="meta" href="/categories/java">JAVA</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <p>A while ago I started reading a highly recommended book for Java developers - Effective Java(2nd edition) by Joshua Bloch.
+This book has a wealth of knowledge about how to write effective java code and not make common mistakes that affect the performance and in some cases, correctness of your code. Over the course of next few months, I intend to write more of my learnings and summarize the items from the book.</p>
+
+<p><strong>Item 1: Consider static factory methods instead of constructors.</strong></p>
+
+<p>Here the author discusses one of the ways one can allow clients of a particular class to create instances without using a constructor, the <strong><em>static factory method.</em></strong></p>
+
+<blockquote>
+<p>Static factory method : A simple static method that returns an instance of the class.</p>
+</blockquote>
+
+<p>Example:</p>
+
+<pre><code>public static Boolean valueOf(boolean b) {
+	return b ? Boolean.TRUE : Boolean.FALSE;
+}
+</code></pre>
+
+<p><strong>Advantages</strong></p>
+
+<p><strong><em>Unlike constructors, factory methods have names. This has many advantages.</em></strong></p>
+
+<p>A well chosen name is easier to use and the client code easier to read. A class can have only a single constructor with a given signature. Often developers will change the order of the parameters and create new constructors. This would result in the client to remember the order of the arguments to pass to the constructor. This is really bad design. Using factory methods, the developer can give a logical name to different methods resulting in better code readability.</p>
+
+<p><strong><em>Unlike constructors, they are not required to create a new object every time it is invoked.</em></strong></p>
+
+<p>With static factory methods, you as a developer of the class has an option to limit the number of instances of the class. These classes are called <em>instance-controlled</em> classes. This is very useful when the creating a new object of the class is an expensive operation. An example given in the book is about the <code>valueOf</code> method in the Boolean class(example above). Here each time the method is invoked, one of the 2 values are returned. This way of creating and caching objects is also used in extensively in the lazy initialization of singleton objects. One added benefit of this is, you can check for objects being equal by using the <code>==</code> operator rather than the <code>equals</code> method.</p>
+
+<p><strong><em>Unlike constructors, they can return an object of any subtype of their return type.</em></strong></p>
+
+<p>This gives you the flexibility in choosing the class of the returned object. This also gives you the flexibility of making your API very thin by not making the implementation classes public.
+Consider the <code>List</code> interface in Java. For one to define a static factory method is not an option as interfaces cannot have static methods. Hence we have a non-instantiable class <code>Collections</code> which has a bunch of static factory methods that return implementations of various collection interfaces. Many of these implementations are not made public. Hence with future versions of the release of Java, the authors can choose to add/change/replace these implementations without affecting the client code.
+One example of adding new implementation is the <strong>Service provider framework</strong>. Example: JDBC. In the service provider framework, there are 3 main interfaces:</p>
+
+<ul>
+<li>The <strong>service interface</strong> which providers implement.</li>
+<li>The <strong>provider registration API</strong> which the system uses to register the provider implementations.</li>
+<li>The <strong>service access API</strong> which the clients use to obtain an instance of the service.</li>
+<li>The <strong>service provider interface</strong> which providers implement to create instances of their service implementation.</li>
+</ul>
+
+<p>With reference to JDBC:</p>
+
+<ul>
+<li><code>Connection</code> = service interface.</li>
+<li><code>DriverManager.registerDriver</code> = provider registration API.</li>
+<li><code>DriverManager.getConnection</code> = service access API.</li>
+<li><code>Driver</code> = service provider interface.</li>
+</ul>
+
+<p><strong>Disadvantages</strong></p>
+
+<p><strong><em>Providing only static factory methods is that class without public or protected constructors cannot be subclassed.</em></strong></p>
+
+<p><strong><em>Static factory methods are not easily distinguished from other static methods.</em></strong></p>
+
+<p>This is mainly the result of the current javadoc tool as it does not have a separate section like constructors. To avoid this, naming static factory methods in a consistent way would help. Some common names mentioned in the book are <code>valueOf</code>, <code>of</code>, <code>getInstance</code>, <code>newInstance</code>, <code>getType</code> and <code>newType</code>.</p>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="https://viraj071.github.io/blog/unique-substrings-in-wraparound-string/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/blog">blog</a></span>
+  
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="https://viraj071.github.io">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017. Viraj Shah. <a href="http://creativecommons.org/licenses/by/3.0/">Some Rights Reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-108622549-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

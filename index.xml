@@ -6,10 +6,19 @@
     <description>Recent content on Viraj Shah</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Sep 2018 21:28:20 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 22 Oct 2018 19:54:49 -0700</lastBuildDate>
     
 	<atom:link href="https://viraj071.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Static factory methods instead of constructors</title>
+      <link>https://viraj071.github.io/blog/static-factory-methods-instead-of-constructors/</link>
+      <pubDate>Mon, 22 Oct 2018 19:54:49 -0700</pubDate>
+      
+      <guid>https://viraj071.github.io/blog/static-factory-methods-instead-of-constructors/</guid>
+      <description>A while ago I started reading a highly recommended book for Java developers - Effective Java(2nd edition) by Joshua Bloch. This book has a wealth of knowledge about how to write effective java code and not make common mistakes that affect the performance and in some cases, correctness of your code. Over the course of next few months, I intend to write more of my learnings and summarize the items from the book.</description>
+    </item>
     
     <item>
       <title>Unique Substrings in Wraparound String</title>

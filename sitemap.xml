@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://viraj071.github.io/blog/static-factory-methods-instead-of-constructors/</loc>
+    <lastmod>2018-10-22T19:54:49-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://viraj071.github.io/blog/unique-substrings-in-wraparound-string/</loc>
     <lastmod>2018-09-09T21:28:20-07:00</lastmod>
   </url>
@@ -40,13 +45,25 @@
   
   <url>
     <loc>https://viraj071.github.io/blog/</loc>
-    <lastmod>2018-09-09T21:28:20-07:00</lastmod>
+    <lastmod>2018-10-22T19:54:49-07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://viraj071.github.io/categories/</loc>
     <lastmod>2018-09-09T21:28:20-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://viraj071.github.io/categories/effective-java/</loc>
+    <lastmod>2018-10-22T19:54:49-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://viraj071.github.io/categories/java/</loc>
+    <lastmod>2018-10-22T19:54:49-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -63,7 +80,7 @@
   
   <url>
     <loc>https://viraj071.github.io/</loc>
-    <lastmod>2018-09-09T21:28:20-07:00</lastmod>
+    <lastmod>2018-10-22T19:54:49-07:00</lastmod>
     <priority>0</priority>
   </url>
   
