@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="Viraj Shah&#39;s Personal Website">
+<meta name="keywords" content="viraj,shah,software,engineer">
+
+<base href="https://viraj071.github.io">
+
+<title>Viraj Shah</title>
+
+<meta name="generator" content="Hugo 0.49.2" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://viraj071.github.io/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-us">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Consider a builder when faced with many constructor parameters</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+      PUBLISHED ON NOV 8, 2018
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/effective-java">EFFECTIVE-JAVA</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <p><strong>Item 2: Consider a builder when faced with many constructor parameters.</strong></p>
+
+<p>In the previous item, we discussed how static factory methods should be a preferred choice over constructors. While the above method works in most cases, in cases where there are a bunch of optional parameters it does not scale well.</p>
+
+<p>The book consist of an example of a class that represents a Nutrition Facts label. This class would have a bunch of fields. Many of them would be required, and many would be optional. To create an instance of such a class, you have a few options.</p>
+
+<p><strong><em>Use the telescoping constructor pattern.</em></strong></p>
+
+<p>This pattern would have a constructor with all the required parameters. Adding to that, it would have constructors with the required parameters with one optional parameter, 2 optional parameters, 3 optional parameters and so on. Here is an example given in the book.</p>
+
+<pre><code>public class NutritionFacts {
+	private final int servingSize;       //required
+	private final int servings;          //required
+	private final int calories;          //optional
+	private final int fat;               //optional
+	private final int carbohydrates;     //optional
+
+	public NutritionFacts(int servingSize, int servings) {
+		this.servingSize = servingSize;
+		this.servings = servings;
+	}
+
+	public NutritionFacts(int servingSize, int servings, int calories) {
+		this.servingSize = servingSize;
+		this.servings = servings;
+		this.calories = calories;
+	}
+
+	public NutritionFacts(int servingSize, int servings, int calories, int fat) {
+		this.servingSize = servingSize;
+		this.servings = servings;
+		this.calories = calories;
+		this.fat = fat;
+	}
+
+	public NutritionFacts(int servingSize, int servings, int calories, int fat, int carbohydrates) {
+		this.servingSize = servingSize;
+		this.servings = servings;
+		this.calories = calories;
+		this.fat = fat;
+		this.carbohydrates = carbohydrates;
+	}
+
+}
+</code></pre>
+
+<ul>
+<li>With the above pattern, often you still need to pass in null/zero values for parameters that you are not interested in.</li>
+<li>The other problem with the above method is that it is not readable. The client of the above class would need to know exactly the order of the parameters in the constructor and hence prone to runtime errors.</li>
+</ul>
+
+<p><strong><em>Use the java beans pattern.</em></strong></p>
+
+<p>IUn this pattern, you create an instance using a non-parameterized constructor and then use setter methods to set values for fields you are interested in. Here is an example:</p>
+
+<pre><code>public class NutritionFacts {
+	private final int servingSize = -1;       //required
+	private final int servings = -1;          //required
+	private final int calories = 0;           //optional
+	private final int fat = 0;                //optional
+	private final int carbohydrates = 0;      //optional
+
+
+	public NutritionFacts() {
+
+	}
+
+	// setter methods for the above fields.
+}
+
+// Client use
+NutritionFacts facts = new NutritonFacts();
+facts.setServingSize(10);
+facts.setServings(1);
+facts.setFat(10);
+</code></pre>
+
+<p>The above pattern has flaws.</p>
+
+<ul>
+<li>As the object is created by invoking the constructor and then the fields are set subsequently across multiple statements, the object may be in an inconsistent state during its construction.</li>
+<li>In usual cases, the constructor would be responsible for checking the validity of all parameters and create an instance only if the parameters are valid unlike above.</li>
+<li>We also cannot use the above pattern in cases of immutable classes.</li>
+<li>As the construction of the object spans across multiple statements, thread safety is a concern in multi-threaded environments.</li>
+</ul>
+
+<p><strong><em>Use the builder pattern.</em></strong></p>
+
+<p>This is considered as a best way to create objects which has a lot of optional parameters. Here we introduce a <code>builder class</code> as a static nested class in the main class(candidate class). This builder class exposes the same setter methods for the fields that are optional in the parent class along with a constructor with the required parameters. The client can create an instance of the builder class and then call the <code>build</code> method on the builder object to create an instance of the parent(main) class. Here is an example:</p>
+
+<pre><code>public class NutritionFacts {
+	private final int servingSize;       //required
+	private final int servings;          //required
+	private final int calories;          //optional
+	private final int fat;               //optional
+	private final int carbohydrates;     //optional
+
+
+	public static class Builder {
+		private final int servingSize;       //required
+		private final int servings;          //required
+
+		private final int calories = 0;          //optional
+		private final int fat = 0;               //optional
+		private final int carbohydrates = 0;     //optional
+
+		public Builder(int servingSize, int servings) {
+			this.servingSize = servingSize;
+			this.servings = servings;
+		}
+
+		public NutritionFacts build() {
+			return new NutritionFacts(this);
+		}
+
+		// setter methods for the optional fields. Should return this for method chaining.
+	}
+
+	public NutritionFacts(Builder builder) {
+		this.servingSize = builder.servingSize;
+		this.servings = builder.servings;
+		this.calories = builder.calories;
+		this.fat = builder.fat;
+		this.carbohydrates = builder.carbohydrates;
+	}
+
+}
+</code></pre>
+
+<p><strong>Advantages</strong></p>
+
+<ul>
+<li>The above method makes NutritionalFacts class immutable. Hence avoiding the thread safety concern present in the java beans pattern.</li>
+<li>A single builder object can be used to create multiple parent objects.</li>
+<li>A constructor can have a single varargs parameter. Because a builder uses setter methods for optional parameters, it can have multiple varargs parameters.</li>
+</ul>
+
+<p><strong>Disadvantages</strong></p>
+
+<ul>
+<li>In order to create an object, you first need to create a builder object. This may cause a performance hit if the object is huge.</li>
+<li>The builder pattern is quite verbose.</li>
+</ul>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="https://viraj071.github.io/blog/static-factory-methods-instead-of-constructors/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/blog">blog</a></span>
+  
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="https://viraj071.github.io">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017. Viraj Shah. <a href="http://creativecommons.org/licenses/by/3.0/">Some Rights Reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-108622549-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

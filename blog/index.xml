@@ -6,10 +6,21 @@
     <description>Recent content in Blogs on Viraj Shah</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Oct 2018 19:54:49 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 08 Nov 2018 06:04:23 -0800</lastBuildDate>
     
 	<atom:link href="https://viraj071.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Consider a builder when faced with many constructor parameters</title>
+      <link>https://viraj071.github.io/blog/consider-a-builder-when-faced-with-many-constructor-parameters/</link>
+      <pubDate>Thu, 08 Nov 2018 06:04:23 -0800</pubDate>
+      
+      <guid>https://viraj071.github.io/blog/consider-a-builder-when-faced-with-many-constructor-parameters/</guid>
+      <description>Item 2: Consider a builder when faced with many constructor parameters.
+In the previous item, we discussed how static factory methods should be a preferred choice over constructors. While the above method works in most cases, in cases where there are a bunch of optional parameters it does not scale well.
+The book consist of an example of a class that represents a Nutrition Facts label. This class would have a bunch of fields.</description>
+    </item>
     
     <item>
       <title>Static factory methods instead of constructors</title>
