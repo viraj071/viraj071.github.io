@@ -1,35 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Effective Java on Viraj Shah</title>
-    <link>https://viraj071.github.io/categories/effective-java/</link>
-    <description>Recent content in Effective Java on Viraj Shah</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 08 Nov 2018 06:04:23 -0800</lastBuildDate>
-    
-	<atom:link href="https://viraj071.github.io/categories/effective-java/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Consider a builder when faced with many constructor parameters</title>
-      <link>https://viraj071.github.io/blog/consider-a-builder-when-faced-with-many-constructor-parameters/</link>
-      <pubDate>Thu, 08 Nov 2018 06:04:23 -0800</pubDate>
-      
-      <guid>https://viraj071.github.io/blog/consider-a-builder-when-faced-with-many-constructor-parameters/</guid>
-      <description>Item 2: Consider a builder when faced with many constructor parameters.
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>effective-java - Category - Viraj Shah</title>
+        <link>https://viraj071.github.io/categories/effective-java/</link>
+        <description>effective-java - Category - Viraj Shah</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>virajshah.77@gmail.com (Viraj Shah)</managingEditor>
+            <webMaster>virajshah.77@gmail.com (Viraj Shah)</webMaster><lastBuildDate>Thu, 08 Nov 2018 06:04:23 -0800</lastBuildDate><atom:link href="https://viraj071.github.io/categories/effective-java/" rel="self" type="application/rss+xml" /><item>
+    <title>Consider a builder when faced with many constructor parameters</title>
+    <link>https://viraj071.github.io/consider-a-builder-when-faced-with-many-constructor-parameters/</link>
+    <pubDate>Thu, 08 Nov 2018 06:04:23 -0800</pubDate>
+    <author>Author</author>
+    <guid>https://viraj071.github.io/consider-a-builder-when-faced-with-many-constructor-parameters/</guid>
+    <description><![CDATA[Item 2: Consider a builder when faced with many constructor parameters.
 In the previous item, we discussed how static factory methods should be a preferred choice over constructors. While the above method works in most cases, in cases where there are a bunch of optional parameters it does not scale well.
-The book consist of an example of a class that represents a Nutrition Facts label. This class would have a bunch of fields.</description>
-    </item>
-    
-    <item>
-      <title>Static factory methods instead of constructors</title>
-      <link>https://viraj071.github.io/blog/static-factory-methods-instead-of-constructors/</link>
-      <pubDate>Mon, 22 Oct 2018 19:54:49 -0700</pubDate>
-      
-      <guid>https://viraj071.github.io/blog/static-factory-methods-instead-of-constructors/</guid>
-      <description>A while ago I started reading a highly recommended book for Java developers - Effective Java(2nd edition) by Joshua Bloch. This book has a wealth of knowledge about how to write effective java code and not make common mistakes that affect the performance and in some cases, correctness of your code. Over the course of next few months, I intend to write more of my learnings and summarize the items from the book.</description>
-    </item>
-    
-  </channel>
+The book consist of an example of a class that represents a Nutrition Facts label. This class would have a bunch of fields.]]></description>
+</item><item>
+    <title>Static factory methods instead of constructors</title>
+    <link>https://viraj071.github.io/static-factory-methods-instead-of-constructors/</link>
+    <pubDate>Mon, 22 Oct 2018 19:54:49 -0700</pubDate>
+    <author>Author</author>
+    <guid>https://viraj071.github.io/static-factory-methods-instead-of-constructors/</guid>
+    <description><![CDATA[A while ago I started reading a highly recommended book for Java developers - Effective Java(2nd edition) by Joshua Bloch. This book has a wealth of knowledge about how to write effective java code and not make common mistakes that affect the performance and in some cases, correctness of your code. Over the course of next few months, I intend to write more of my learnings and summarize the items from the book.]]></description>
+</item></channel>
 </rss>

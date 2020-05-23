@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Unique Substrings in Wraparound String - Viraj Shah</title><meta name="Description" content="Solving Unique Substrings in Wraparound String on Leetcode."><meta property="og:title" content="Unique Substrings in Wraparound String" />
+<meta property="og:description" content="Solving Unique Substrings in Wraparound String on Leetcode." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://viraj071.github.io/unique-substrings-in-wraparound-string/" />
+<meta property="og:image" content="https://viraj071.github.io/logo.png"/>
+<meta property="article:published_time" content="2018-09-09T21:28:20-07:00" />
+<meta property="article:modified_time" content="2018-09-09T21:28:20-07:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://viraj071.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Unique Substrings in Wraparound String"/>
+<meta name="twitter:description" content="Solving Unique Substrings in Wraparound String on Leetcode."/>
+<meta name="application-name" content="Viraj Shah">
+<meta name="apple-mobile-web-app-title" content="Viraj Shah"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://viraj071.github.io/unique-substrings-in-wraparound-string/" /><link rel="prev" href="https://viraj071.github.io/largest-divisible-subset/" /><link rel="next" href="https://viraj071.github.io/static-factory-methods-instead-of-constructors/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.8235a67a2521ef99fb1e455a5891b022af1653b4ede3cfffcac4e473beee88fbcc1a36bbb3cfdd75fd6df46732032f9d96e30adae9c88b769e1fbf7945cd27e0.css" integrity="sha512-gjWmeiUh75n7HkVaWJGwIq8WU7Tt48//ysTkc77uiPvMGja7s8/ddf1t9GcyAy&#43;dluMK2unIi3aeH795Rc0n4A=="><link rel="stylesheet" href="/css/style.min.8b56e6f4f82ca57c3b8eb869e5337f6aad3115ae4d4acc584c7bb337a3008d59d319f85ae38a47a367b07d12a319440eebb328d6222532d4b375c8ceed2cf93f.css" integrity="sha512-i1bm9PgspXw7jrhp5TN/aq0xFa5NSsxYTHuzN6MAjVnTGfha44pHo2ewfRKjGUQO67Mo1iIlMtSzdcjO7Sz5Pw=="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.2fb31670aec534f73036a9cb759abcea54c760b750a996b3e58700804fb97271a6970f094f4dd0076fa8c4bd74d14781e9197364b531086492e3ffbe98d65dc7.css" integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE&#43;5cnGmlw8JT03QB2&#43;oxL100UeB6RlzZLUxCGSS4/&#43;&#43;mNZdxw=="><link rel="stylesheet" href="/lib/animate/animate.min.76826b0bfa1c53c546551c773bdf7cd7ed9a6149f77ee5955afa8b8b553eb40d8c595cecc3e3552aad4fac4345d3733e4d804ff763e7614957147d595b41692f.css" integrity="sha512-doJrC/ocU8VGVRx3O9981&#43;2aYUn3fuWVWvqLi1U&#43;tA2MWVzsw&#43;NVKq1PrENF03M&#43;TYBP92PnYUlXFH1ZW0FpLw=="><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Unique Substrings in Wraparound String",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/viraj071.github.io\/unique-substrings-in-wraparound-string\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/viraj071.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","wordcount":  526 ,
+        "url": "https:\/\/viraj071.github.io\/unique-substrings-in-wraparound-string\/","datePublished": "2018-09-09T21:28:20-07:00","dateModified": "2018-09-09T21:28:20-07:00","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/viraj071.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "Viraj Shah"
+            },"description": "Solving Unique Substrings in Wraparound String on Leetcode."
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Viraj Shah">Viraj Shah</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Viraj Shah">Viraj Shah</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">Unique Substrings in Wraparound String</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Viraj Shah</a></span>&nbsp;
+                    <span class="post-category">included in<a href="/categories/algorithms/">
+                                <i class="far fa-folder fa-fw"></i>algorithms
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2018-09-09>2018-09-09</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;about 526 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 min&nbsp;</div>
+        </div><div class="content" id="content"><p>Solving <strong><a href="https://leetcode.com/problems/unique-substrings-in-wraparound-string/description/" target="_blank" rel="noopener noreffer">Unqiue Substrings in Wraparound String</a></strong> problem on Leetcode.</p>
+<p>The overall gist of the problem is as follows:
+Given a string <code>p</code>, you need to find the total count of all the non-empty unique substrings of <code>p</code>, present in a infinite wraparound string of <em>abcdefghijklmnopqrstuvwxyz</em>, where length of <code>p</code> could be over <strong>10000</strong> characters.</p>
+<p>The brute force solution to this problem would be to go over all the substrings of <code>p</code> and check if they are present in the above wraparound string. The time complexity of this solution would be of the order of <strong>O(n<sup>3</sup>)</strong>.</p>
+<p>We can do better with <strong>dynamic programming.</strong></p>
+<p>To avoid duplicates in our final count, we would need to somehow keep track of all the substrings we have already added to our count. Doing this would require a lot of memory. Instead, what if we kept track of the length of the maximum substring ending in a particular character and update it as and when we find a new substring ending in the same character. While doing so, we also substract the previous maximum from the total and add the new maximum to the total to avoid the duplicate count.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public int findSubstringInWraproundString(String p) {
+    if (p.length() &lt; 1) {
+        return p.length();
+    }
+    Map&lt;Character, Integer&gt; charToSubstringCount = new HashMap&lt;&gt;();
+    int prevCount = 1;
+    int total = 1;
+    charToSubstringCount.put(p.charAt(0), 1);
+    for (int i = 1; i&lt;p.length(); ++i) {
+        char currentChar = p.charAt(i);
+        char prevChar = p.charAt(i-1);
+        int currentCount = 1;
+        if (currentChar == &#39;a&#39;) {
+            if (prevChar == &#39;z&#39;) {
+                currentCount = prevCount + 1;
+            }
+        } else if (prevChar + 1 == currentChar) {
+            currentCount = prevCount + 1;
+        }
+        if (!charToSubstringCount.containsKey(currentChar)) {
+            charToSubstringCount.put(currentChar, currentCount);
+            total += currentCount;
+        } else {
+            if (currentCount &gt; charToSubstringCount.get(currentChar)) {
+                total = total - charToSubstringCount.get(currentChar) + currentCount;
+                charToSubstringCount.put(currentChar, currentCount);
+            }
+        }
+        prevCount = currentCount;
+    }
+    return total;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p><em><strong>For example</strong></em></p>
+<p>Consider <code>p</code> to be <em><strong>abzabc</strong></em>.</p>
+<p><strong>a</strong> in itself is a valid substring so we start with the <code>total</code> count to be 1 and we use the <code>prevCount</code> to count the length of the substring which is valid, in this case, the consecutive elements are part of the above wraparound string, till the previous character.
+Starting at index 1, we check if the previous character and current character form a valid substring. If they do, we increase the length of the valid substring to include the current character.
+Once we have the length of the substring ending at the current character, we check if we already have seen a substring ending in the current character previously. If we do, and its length was smaller than the current substring length, we substract the previous length and add the new length.</p>
+<table>
+<thead>
+<tr>
+<th>Index.</th>
+<th>Maximum Length ending in character.</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>a-&gt;1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>a-&gt;1, b-&gt;2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>a-&gt;1, b-&gt;2, z-&gt;1</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>b-&gt;2, z-&gt;1, a-&gt;2</td>
+<td>5</td>
+</tr>
+<tr>
+<td>4</td>
+<td>z-&gt;1, a-&gt;2, b-&gt;3</td>
+<td>6</td>
+</tr>
+<tr>
+<td>5</td>
+<td>z-&gt;1, a-&gt;2, b-&gt;3, c-&gt;4</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<p>The above solution has <em><strong>O(n)</strong></em> time complexity and <em><strong>O(1)</strong></em> space complexity.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>The article was updated on 2018-09-09</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/unique-substrings-in-wraparound-string/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://viraj071.github.io/unique-substrings-in-wraparound-string/" data-title="Unique Substrings in Wraparound String" data-via="viraj071"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://viraj071.github.io/unique-substrings-in-wraparound-string/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on Pocket" data-sharer="pocket" data-url="https://viraj071.github.io/unique-substrings-in-wraparound-string/"><i class="fab fa-get-pocket fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/largest-divisible-subset/" class="prev" rel="prev" title="Largest Divisible Subset"><i class="fas fa-angle-left fa-fw"></i>Largest Divisible Subset</a>
+            <a href="/static-factory-methods-instead-of-constructors/" class="next" rel="next" title="Static factory methods instead of constructors">Static factory methods instead of constructors<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.8"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2017 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Viraj Shah</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.01a9044cb72aeb889854b4c442d03cc67db5dcfff848a5bba3c8df88e1ad3a04278cbda7603d1c97981d6759794e673f60aac6a54f53139bbdd044d4dfc2e475.css" integrity="sha512-AakETLcq64iYVLTEQtA8xn213P/4SKW7o8jfiOGtOgQnjL2nYD0cl5gdZ1l5Tmc/YKrGpU9TE5u90ETU38LkdQ=="><link rel="stylesheet" href="/lib/katex/copy-tex.min.cfee09198e00011c7d33435e1b23862f95b6827c243de4038963ca714516395c4f88715df65f4fd10a8a69988fbfed1b5a2aff27d588004581b91af98fc65a58.css" integrity="sha512-z&#43;4JGY4AARx9M0NeGyOGL5W2gnwkPeQDiWPKcUUWOVxPiHFd9l9P0QqKaZiPv&#43;0bWir/J9WIAEWBuRr5j8ZaWA=="><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.2d0f7b71a99aaff94e9624ff32a8dc42ce645a0cba433fdc091cf34735027efd1fa2db024c2f591d768f426255f17bbf3d500b7c967b0437b3979956dffa81c6.css" integrity="sha512-LQ97camar/lOliT/MqjcQs5kWgy6Qz/cCRzzRzUCfv0fotsCTC9ZHXaPQmJV8Xu/PVALfJZ7BDezl5lW3/qBxg=="><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.e9c0c2a48f70798908fc0c6e65ba47b80e8cd3961f0580a2fee3a84434d3af807a674e9447b49523af87a6a80642a32887c031eb5e1ded2af091bcd8e4bcd935.js" integrity="sha512-6cDCpI9weYkI/AxuZbpHuA6M05YfBYCi/uOoRDTTr4B6Z06UR7SVI6&#43;HpqgGQqMoh8Ax614d7SrwkbzY5LzZNQ=="></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.95377e01eea2e97083a9e6b4ae56c55a423a5b0cb7e6a298f06c004bbc318ff9a88e6687caa4c1c869aa278c33aae29bdb234b2cd85ae80acf7ad76b7ad61862.js" integrity="sha512-lTd&#43;Ae6i6XCDqea0rlbFWkI6Wwy35qKY8GwAS7wxj/mojmaHyqTByGmqJ4wzquKb2yNLLNha6ArPetdretYYYg=="></script><script type="text/javascript" src="/lib/lunr/lunr.min.1e225d911c92cd786251c5f65707976a2cbcc9e636d767a9fe3e75cd1ff3e483c25f86543b169fea7689ff47502ffda5f992fe07d8a7feee274fc40967fde68a.js" integrity="sha512-HiJdkRySzXhiUcX2VweXaiy8yeY212ep/j51zR/z5IPCX4ZUOxaf6naJ/0dQL/2l&#43;ZL&#43;B9in/u4nT8QJZ/3mig=="></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.b9a6842a800f5447bd8f5b22e0413c86390d6070457e45eac342fd5f159fb98a9cc0d2f69bc321df28d67c2074ce27d0cbe568c1ebaa2e15e8f9d808e56ae126.js" integrity="sha512-uaaEKoAPVEe9j1si4EE8hjkNYHBFfkXqw0L9XxWfuYqcwNL2m8Mh3yjWfCB0zifQy&#43;VoweuqLhXo&#43;dgI5WrhJg=="></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.843586ca1f88cb832bf401cecd43f6f98d2254f9ff070c716a84a57848c7fe2d68e0455317fb21d3f0354b28a2f0f58e69efae3ebf93fca1f0ca7a1e6d2b8087.js" integrity="sha512-hDWGyh&#43;Iy4Mr9AHOzUP2&#43;Y0iVPn/BwxxaoSleEjH/i1o4EVTF/sh0/A1Syii8PWOae&#43;uPr&#43;T/KHwynoebSuAhw=="></script><script type="text/javascript" src="/lib/sharer/sharer.min.c4c86aeb36b41ca1e3aad5e04e9297a121178682f01c799a25844b78c742d98fe914b37de07ce1f1ce0812385a2272654d39db5d80c9df7658de91e4a1987f26.js" integrity="sha512-xMhq6za0HKHjqtXgTpKXoSEXhoLwHHmaJYRLeMdC2Y/pFLN94Hzh8c4IEjhaInJlTTnbXYDJ33ZY3pHkoZh/Jg=="></script><script type="text/javascript" src="/lib/katex/katex.min.da4f96fb738686d777c219c6b77dde93fa00d4cfdaa81e8c8abf9621c0ab4ae202db20fa8935fa22e3dfe6ad681091904f4ea399ae4ae9c6bb5ea6f8bbb52ba3.js" integrity="sha512-2k&#43;W&#43;3OGhtd3whnGt33ek/oA1M/aqB6Mir&#43;WIcCrSuIC2yD6iTX6IuPf5q1oEJGQT06jma5K6ca7Xqb4u7Urow=="></script><script type="text/javascript" src="/lib/katex/auto-render.min.1a2706adb2c15c987691b17e0d80feb025b984f6afa0e7d500a48e13bfaa8180a05537307befc3e0b5de812f4955363bda8bdce549e0e059a5fa2d6e0f7b8ec9.js" integrity="sha512-GicGrbLBXJh2kbF&#43;DYD&#43;sCW5hPavoOfVAKSOE7&#43;qgYCgVTcwe&#43;/D4LXegS9JVTY72ovc5Ung4Fml&#43;i1uD3uOyQ=="></script><script type="text/javascript" src="/lib/katex/copy-tex.min.0c94f619ff73a2094558dbb180570c677ce2f516bd18f0f1a70f7ff24c90e9c8e2f9239a2e5575038f48b6ce7778b66519f6f85a3c110a9b4451d363bba5b183.js" integrity="sha512-DJT2Gf9zoglFWNuxgFcMZ3zi9Ra9GPDxpw9/8kyQ6cji&#43;SOaLlV1A49Its53eLZlGfb4WjwRCptEUdNju6Wxgw=="></script><script type="text/javascript" src="/lib/katex/mhchem.min.078b12bb78ac618a5abab7d2b665ec875c0bef5b3cc4a159c8d8c20ae507c3c7de0a1f519691b4df1f3e6b77a016267556e0a88fae3adc8635f159eb0c16cab8.js" integrity="sha512-B4sSu3isYYpaurfStmXsh1wL71s8xKFZyNjCCuUHw8feCh9RlpG03x8&#43;a3egFiZ1VuCoj6463IY18VnrDBbKuA=="></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.c975ea3858dd8c7347d46343fb510ed236efbde6c0069cc6283eba7639d47e22a560c1391c6314247a0269e1380f93d31b662c4897fa770ab2514bd0bd2d2f68.js" integrity="sha512-yXXqOFjdjHNH1GND&#43;1EO0jbvvebABpzGKD66djnUfiKlYME5HGMUJHoCaeE4D5PTG2YsSJf6dwqyUUvQvS0vaA=="></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.7f56aa4d2b06aa4cb2caee5a60058f77812eaad53b4575bec805dece49d85c3b717b063cee23657ce0f512b3130e40d8b5e9b5bc4c808394d3ac05d5ac39968f.js" integrity="sha512-f1aqTSsGqkyyyu5aYAWPd4EuqtU7RXW&#43;yAXezknYXDtxewY87iNlfOD1ErMTDkDYtem1vEyAg5TTrAXVrDmWjw=="></script></body>
+</html>
